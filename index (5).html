@@ -1,13 +1,127 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>مراعي تيماء</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+<style>
+/* Layout concept: متجر مواشٍ تُعرض فيه كل رأس على "بطاقة أذن" صفراء مثقوبة، كما تُعلَّق على الماشية فعلًا. الصفحة هادئة والبطاقات هي اللحظة المميزة. */
+:root {
+  --bg: #E6E9DF;
+  --surface: #F4F5EF;
+  --ink: #17301F;
+  --muted: #55665A;
+  --line: #C6CDBC;
+  --tag: #B7C27A;
+  --tag-ink: #1E2A0C;
+  --ok: #2E7D4F;
+  --warn: #A5461B;
+  --font-display: "Segoe UI", Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+  --font-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-util: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1B14; --surface: #172A1E; --ink: #E7ECE2; --muted: #9BAA9E;
+    --line: #2B4033; --ok: #6CC48B; --warn: #E58B5E; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1B14; --surface: #172A1E; --ink: #E7ECE2; --muted: #9BAA9E;
+  --line: #2B4033; --ok: #6CC48B; --warn: #E58B5E; color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 16px; line-height: 1.7;
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+* { box-sizing: border-box; }
+.app { max-width: 1080px; margin: 0 auto; padding-bottom: 120px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: 0; line-height: 1; }
+.brand small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 13px; color: var(--muted); margin-top: 6px; }
+.cartbtn { border: 1.5px solid var(--ink); background: transparent; border-radius: 999px; padding: 8px 16px; display: inline-flex; gap: 10px; align-items: center; min-height: 44px; }
+.cartbtn b { background: var(--tag); color: var(--tag-ink); border-radius: 999px; min-width: 26px; height: 26px; display: inline-grid; place-items: center; font-size: 14px; padding-inline: 6px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center; padding-block: 48px 40px; }
+.hero > * { min-width: 0; }
+.hero h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 6vw, 60px); line-height: 1.25; margin: 0 0 16px; text-wrap: balance; }
+.hero p { font-size: 18px; color: var(--muted); max-width: 34em; margin: 0 0 24px; }
+.cta { display: inline-block; background: var(--ink); color: var(--bg); text-decoration: none; padding: 12px 26px; border-radius: 999px; font-weight: 600; min-height: 48px; }
+.hang { display: flex; justify-content: center; }
+.hero-tag { transform-origin: 50% 0; width: min(260px, 100%); animation: sway 3.2s ease-out 1 both; }
+@keyframes sway { 0% { transform: rotate(9deg); } 30% { transform: rotate(-6deg); } 55% { transform: rotate(3deg); } 80% { transform: rotate(-1deg); } 100% { transform: rotate(0); } }
+
+/* tag (shared look) */
+.tag { background: var(--surface); border-radius: 30px 30px 14px 14px; overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; }
+.tag-head { background: var(--tag); color: var(--tag-ink); padding: 40px 20px 18px; position: relative; text-align: center; }
+.tag-head::before { content: ""; position: absolute; top: 14px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 2px 3px rgba(0,0,0,.35); }
+.tag-head h3, .tag-head .big { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.2; margin: 0; }
+.tag-head .sub { font-size: 14px; margin-top: 2px; opacity: .85; }
+.tag-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.price { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1; display: flex; align-items: baseline; gap: 6px; }
+.price span { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--muted); }
+.meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+.sku { font-family: var(--font-util); font-size: 13px; direction: ltr; unicode-bidi: isolate; }
+.stock { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+.stock::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); }
+.stock.low { color: var(--warn); }
+.stock.low::before { background: var(--warn); }
+
+/* breeds */
+.sec-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin: 8px 0 18px; }
+.sec-h h2 { font-family: var(--font-display); font-size: 30px; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1.5px solid var(--line); background: transparent; border-radius: 999px; padding: 6px 16px; min-height: 40px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip i { font-style: normal; color: var(--muted); margin-inline-start: 6px; font-size: 13px; }
+.chip[aria-pressed="true"] i { color: inherit; opacity: .75; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.grid > * { min-width: 0; }
+
+/* buttons */
+.add { background: var(--ink); color: var(--bg); border: 0; border-radius: 999px; padding: 10px 18px; font-weight: 600; min-height: 46px; width: 100%; }
+.step { display: flex; align-items: center; justify-content: space-between; border: 1.5px solid var(--ink); border-radius: 999px; min-height: 46px; padding: 2px; }
+.step button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: transparent; font-size: 22px; line-height: 1; }
+.step button:disabled { opacity: .35; cursor: default; }
+.step output { font-weight: 600; min-width: 2ch; text-align: center; }
+
+.foot { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+/* order bar + sheet */
+.bar { position: fixed; inset: auto 0 0 0; padding: 12px max(16px, env(safe-area-inset-left, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-right, 0px)); background: var(--ink); color: var(--bg); display: flex; align-items: center; justify-content: space-between; gap: 12px; z-index: 20; }
+.bar button { background: var(--tag); color: var(--tag-ink); border: 0; border-radius: 999px; padding: 10px 22px; font-weight: 600; min-height: 46px; }
+.bar .sum { font-weight: 500; }
+.bar .sum b { font-family: var(--font-display); font-size: 22px; margin-inline-start: 6px; }
+.sheet { position: fixed; inset: 0; z-index: 30; background: rgba(8, 16, 11, .55); display: flex; align-items: flex-end; justify-content: center; }
+.sheet-in { background: var(--surface); width: min(560px, 100%); max-height: 86%; overflow-y: auto; border-radius: 28px 28px 0 0; padding: 22px max(20px, env(safe-area-inset-left, 0px)) calc(22px + env(safe-area-inset-bottom, 0px)); }
+.sheet-in h2 { font-family: var(--font-display); font-size: 26px; margin: 0 0 12px; }
+.line { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding-block: 14px; border-bottom: 1px solid var(--line); align-items: center; }
+.line .nm { font-weight: 600; }
+.line .lt { font-family: var(--font-display); font-weight: 700; text-align: end; }
+.line .step { width: 130px; }
+.total { display: flex; justify-content: space-between; padding-block: 16px; font-weight: 600; font-size: 18px; }
+.empty { color: var(--muted); padding-block: 20px; }
+.note { margin-top: 12px; font-size: 14px; color: var(--muted); min-height: 1.5em; }
+.row2 { display: flex; gap: 10px; }
+.row2 .add { flex: 1; }
+.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 999px; padding: 10px 18px; min-height: 46px; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; padding-block: 32px 28px; gap: 28px; }
+  .hang { order: -1; }
+  .hero-tag { width: 200px; }
+  .hero-tag .big { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-tag { animation: none; } }
+</style>
+
 <div class="app" dir="rtl" lang="ar">
   <header class="top">
     <div class="brand">مراعي تيماء<small>أغنام وتيوس بالرأس</small></div>
@@ -57,6 +171,93 @@
   </div>
 </div>
 
-<script src="script.js"></script>
-</body>
-</html>
+<script>
+var PRODUCTS = [
+  {name:"نعيمي", sku:"sKZGilNR3m", price:1100, qty:999},
+  {name:"نجدي", sku:"UgNmfDzNBQ", price:1100, qty:999},
+  {name:"نجدي جذع", sku:"wE4mpjQVF0", price:1100, qty:999},
+  {name:"حري", sku:"wud8e8ANS6", price:1100, qty:100},
+  {name:"تيس", sku:"BXZx3hUFld", price:1100, qty:100},
+  {name:"نجدي", sku:"qfuqOPV8Si", price:1100, qty:10},
+  {name:"نعيمي", sku:"1795", price:1100, qty:22},
+  {name:"حري", sku:"6xwcOiYo8H", price:1100, qty:5}
+];
+var nf = new Intl.NumberFormat("ar-EG");
+function n(x){ return nf.format(x); }
+function money(x){ return n(x) + " ر.س"; }
+var cart = {}, filter = "الكل";
+var $ = function(id){ return document.getElementById(id); };
+
+function breeds(){
+  var map = {}; PRODUCTS.forEach(function(p){ var k = p.name.split(" ")[0]; map[k] = (map[k]||0) + 1; });
+  return map;
+}
+function renderChips(){
+  var map = breeds(), html = '<button class="chip" type="button" aria-pressed="' + (filter==="الكل") + '" data-f="الكل">الكل<i>' + n(PRODUCTS.length) + '</i></button>';
+  Object.keys(map).forEach(function(k){ html += '<button class="chip" type="button" aria-pressed="' + (filter===k) + '" data-f="' + k + '">' + k + '<i>' + n(map[k]) + '</i></button>'; });
+  $("chips").innerHTML = html;
+}
+function stockHtml(p){
+  if (p.qty <= 10) return '<span class="stock low">بقي ' + n(p.qty) + ' فقط</span>';
+  return '<span class="stock">متوفر</span>';
+}
+function actionHtml(p){
+  var q = cart[p.sku] || 0;
+  if (!q) return '<button class="add" type="button" data-add="' + p.sku + '">أضف إلى الطلب</button>';
+  return '<div class="step"><button type="button" data-dec="' + p.sku + '" aria-label="إنقاص">−</button><output>' + n(q) + '</output><button type="button" data-inc="' + p.sku + '" aria-label="زيادة"' + (q >= p.qty ? " disabled" : "") + '>+</button></div>';
+}
+function renderGrid(){
+  var list = PRODUCTS.filter(function(p){ return filter==="الكل" || p.name.split(" ")[0]===filter; });
+  $("grid").innerHTML = list.map(function(p){
+    return '<article class="tag"><div class="tag-head"><h3>' + p.name + '</h3></div><div class="tag-body">' +
+      '<div class="price">' + n(p.price) + ' <span>ر.س للرأس</span></div>' +
+      '<div class="meta">' + stockHtml(p) + '<span class="sku">' + p.sku + '</span></div>' +
+      actionHtml(p) + '</div></article>';
+  }).join("");
+}
+function totals(){
+  var c = 0, t = 0;
+  PRODUCTS.forEach(function(p){ var q = cart[p.sku]||0; c += q; t += q*p.price; });
+  return {c:c, t:t};
+}
+function renderCart(){
+  var s = totals();
+  $("cartCount").textContent = n(s.c);
+  $("bar").hidden = s.c === 0;
+  $("barCount").textContent = n(s.c) + (s.c === 1 ? " رأس" : " رؤوس") + " ·";
+  $("barTotal").textContent = money(s.t);
+  $("sheetTotal").textContent = money(s.t);
+  var html = "";
+  PRODUCTS.forEach(function(p){
+    var q = cart[p.sku]||0; if (!q) return;
+    html += '<div class="line"><div><div class="nm">' + p.name + '</div><div class="sku">' + p.sku + '</div></div><div class="lt">' + money(q*p.price) + '</div>' +
+      '<div class="step"><button type="button" data-dec="' + p.sku + '" aria-label="إنقاص">−</button><output>' + n(q) + '</output><button type="button" data-inc="' + p.sku + '" aria-label="زيادة"' + (q >= p.qty ? " disabled" : "") + '>+</button></div></div>';
+  });
+  $("lines").innerHTML = html || '<div class="empty">لم تضف أي رأس بعد. اختر نوعًا من القائمة وأضفه إلى الطلب.</div>';
+  $("pay").disabled = s.c === 0;
+  $("pay").style.opacity = s.c === 0 ? ".4" : "1";
+}
+function refresh(){ renderGrid(); renderCart(); }
+function change(sku, d){
+  var p = PRODUCTS.filter(function(x){ return x.sku===sku; })[0]; if (!p) return;
+  var q = Math.max(0, Math.min(p.qty, (cart[sku]||0) + d));
+  if (q) cart[sku] = q; else delete cart[sku];
+  refresh();
+}
+document.addEventListener("click", function(e){
+  var t = e.target.closest("button"); if (!t) return;
+  if (t.dataset.f){ filter = t.dataset.f; renderChips(); renderGrid(); }
+  else if (t.dataset.add) change(t.dataset.add, 1);
+  else if (t.dataset.inc) change(t.dataset.inc, 1);
+  else if (t.dataset.dec) change(t.dataset.dec, -1);
+});
+function openSheet(){ $("note").textContent = ""; $("sheet").hidden = false; $("closeSheet").focus(); }
+function closeSheet(){ $("sheet").hidden = true; }
+$("openCart").onclick = openSheet; $("barOpen").onclick = openSheet; $("closeSheet").onclick = closeSheet;
+$("sheet").addEventListener("click", function(e){ if (e.target === $("sheet")) closeSheet(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeSheet(); });
+$("pay").onclick = function(){ if (totals().c) $("note").textContent = "الدفع غير مربوط في هذا التصميم. يُربط من إعدادات المتجر."; };
+renderChips(); refresh();
+</script>
+
+</body></html>
