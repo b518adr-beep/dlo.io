@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مراعي تيماء</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app" dir="rtl" lang="ar">
+  <header class="top">
+    <div class="brand">مراعي تيماء<small>أغنام وتيوس بالرأس</small></div>
+    <button class="cartbtn" id="openCart" type="button">طلبي <b id="cartCount">٠</b></button>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>من مراعي تيماء إلى مائدتكم طازجًا</h1>
+      <p>نعيمي ونجدي وحري وتيس. سعر الرأس ١١٠٠ ريال، والكمية المتاحة من كل نوع ظاهرة قبل أن تطلب.</p>
+      <a class="cta" href="#types">تصفّح الأنواع</a>
+    </div>
+    <div class="hang" aria-hidden="true">
+      <div class="tag hero-tag">
+        <div class="tag-head"><div class="big">تيماء</div><div class="sub">مراعي</div></div>
+        <div class="tag-body"><div class="price">١١٠٠ <span>ر.س للرأس</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="types">
+    <div class="sec-h">
+      <h2>الأنواع المتوفرة</h2>
+      <div class="chips" id="chips" role="group" aria-label="تصفية حسب النوع"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer class="foot"><span>متجر مراعي تيماء</span><span>الأسعار بالريال السعودي</span></footer>
+</div>
+
+<div class="bar" id="bar" dir="rtl" hidden>
+  <div class="sum"><span id="barCount"></span><b id="barTotal"></b></div>
+  <button type="button" id="barOpen">مراجعة الطلب</button>
+</div>
+
+<div class="sheet" id="sheet" dir="rtl" lang="ar" hidden>
+  <div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <h2 id="sheetTitle">طلبي</h2>
+    <div id="lines"></div>
+    <div class="total"><span>الإجمالي</span><span id="sheetTotal"></span></div>
+    <div class="row2">
+      <button class="add" type="button" id="pay">متابعة إلى الدفع</button>
+      <button class="ghost" type="button" id="closeSheet">إغلاق</button>
+    </div>
+    <div class="note" id="note" aria-live="polite"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
